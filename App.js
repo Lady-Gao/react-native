@@ -1,75 +1,43 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React from 'react';
+import { Button, View, Text } from 'react-native';
+import { createStackNavigator,createBottomTabNavigator, createAppContainer } from 'react-navigation'; // Version can be specified in package.json
+import { Provider } from 'react-redux';
+import configureStore from './src/store.js';
+const store = configureStore();
+import Car from './src/view/car'
+import Home from './src/view/home'
 
-import React, {Fragment} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import Home from "./home";
-const App = () => {
-  return (
-   <View>
-     <Home />
-     <Text>ddddssaadad</Text>
-   </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+class Hotme extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+class Care extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Details Screen</Text>
+      </View>
+    );
+  }
+}
+const TabNavigator = createBottomTabNavigator({
+  Home: Home,
+  car: Car,
 });
+const AppContainer = createAppContainer(TabNavigator);
 
-export default App;
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store} >
+      <AppContainer />
+    </Provider>
+    )
+  }
+}
